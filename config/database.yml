@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV["MARATHON_DATABASE_USER"] %>
+  password: <%= ENV["MARATHON_DATABASE_PASSWORD"] %>
+
+development:
+  <<: *default
+  database: marathon_api
+
+test:
+  <<: *default
+  database: marathon_api_test
+
+production:
+  <<: *default
+  database: marathon_api_production
+  username: marathon_api
+  password: <%= ENV["MARATHON_API_DATABASE_PASSWORD"] %>
